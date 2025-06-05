@@ -1,14 +1,16 @@
 import { Router } from 'express';
-import { generateMockUsers, generateAndInsertData } from '../controllers/mocksController.js';
+import mocksController from '../controllers/mocks.controller.js';
 
 const router = Router();
 
-router.get('/mockingusers', generateMockUsers);
+// Ruta para generar 50 usuarios fake
+router.get('/mockingusers', mocksController.crearUsuariosMocking);
 
-router.post('/generateData', generateAndInsertData);
+// Ruta para generar y guardar usuarios + mascotas (recibe users y pets por body)
+router.post('/generateData', mocksController.generarYGuardarDatos);
 
-router.get('/mockingpets', (req, res) => {
-  
-});
+// Ruta para generar 50 mascotas fake
+router.get('/mockingpets', mocksController.crearMascotas);
 
 export default router;
+

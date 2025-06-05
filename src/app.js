@@ -22,3 +22,21 @@ app.use('/api/sessions',sessionsRouter);
 app.use("/api/mocks", mocksRouter);
 
 app.listen(PORT,()=>console.log(`Listening on ${PORT}`))
+
+import swaggerJSDoc from 'swagger-jsdoc';
+import swaggerUiExpress from 'swagger-ui-express';
+
+const swggerOptions = {
+    definition: {
+        openapi: "3.0.1",
+        info: {
+            title: "Documentación de la App Adoptame",
+            description: "App dedicada a buscar familias para los animales"
+        }
+    },
+    apis: ["./src/docs/**/*.yaml"]
+}
+
+const specs = swaggerJSDoc(swggerOptions);
+
+app.use("/apidocs", swaggerUiExpress.serve, swaggerUiExpress.setup(specs));
